@@ -33,7 +33,9 @@ class Node:
     True
     """
 
-    def __init__(self, pos_x, pos_y, goal_x, goal_y, parent):
+    def __init__(
+        self, pos_x: int, pos_y: int, goal_x: int, goal_y: int, parent: int,
+    ) -> None:
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.pos = (pos_y, pos_x)
@@ -71,7 +73,7 @@ class GreedyBestFirst:
      (6, 2), (6, 3), (5, 3), (5, 4), (5, 5), (6, 5), (6, 6)]
     """
 
-    def __init__(self, start, goal):
+    def __init__(self, start: Tuple[int], goal: Tuple[int]) -> None:
         self.start = Node(start[1], start[0], goal[1], goal[0], None)
         self.target = Node(goal[1], goal[0], goal[1], goal[0], None)
 
@@ -122,13 +124,7 @@ class GreedyBestFirst:
                 continue
 
             successors.append(
-                Node(
-                    pos_x,
-                    pos_y,
-                    self.target.pos_y,
-                    self.target.pos_x,
-                    parent,
-                )
+                Node(pos_x, pos_y, self.target.pos_y, self.target.pos_x, parent,)
             )
         return successors
 
@@ -156,8 +152,8 @@ if __name__ == "__main__":
     greedy_bf = GreedyBestFirst(init, goal)
     path = greedy_bf.search()
 
-    for elem in path:
-        grid[elem[0]][elem[1]] = 2
+    for i, j in path:
+        grid[i][j] = 2
 
     for elem in grid:
         print(elem)
